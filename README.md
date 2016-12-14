@@ -10,4 +10,3 @@ Technology used:
 * [Pinterest API](https://developers.pinterest.com/)
 * TBD
 
-*SOME TELEMATICS FEATURE*
