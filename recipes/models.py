@@ -1,5 +1,11 @@
 from __future__ import unicode_literals
 from django.db import models
+#from django.contrib.auth.models import User
+
+
+# class PinUser(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     token = models.CharField(max_length=255)
 
 
 class Pin(models.Model):
@@ -17,18 +23,18 @@ class Pin(models.Model):
         return self.url + " " + self.title
 
 
+class MealDay(models.Model):
+    date = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.date
+
+
 class Meal(models.Model):
     url = models.CharField(max_length=200)
     image = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
+    meal_day = models.ForeignKey(MealDay, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title
-
-
-class MealDay(models.Model):
-    meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
-    meal_day = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.meal_day + " " + self.meal.title
+        return self.title + " " + self.meal_day.date
