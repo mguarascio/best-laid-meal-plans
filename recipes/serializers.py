@@ -8,13 +8,16 @@ class PinSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'url', 'note', 'image', 'title')
 
 
-class MealSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Meal
-        fields = ('url', 'image', 'title')
-
-
 class MealDaySerializer(serializers.HyperlinkedModelSerializer):
+
     class Meta:
         model = MealDay
-        fields = (['meal_day'])
+        fields = (['date'])
+
+
+class MealSerializer(serializers.HyperlinkedModelSerializer):
+    meal_day = MealDaySerializer()
+
+    class Meta:
+        model = Meal
+        fields = ('url', 'image', 'title', 'meal_day')
